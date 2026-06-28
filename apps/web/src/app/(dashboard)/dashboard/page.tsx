@@ -24,10 +24,10 @@ export default function DashboardPage() {
   const { data: conversions, isLoading: convsLoading } = useConversions(1, 5);
 
   const statCards = [
-    { label: "Total Documents", value: stats?.total_documents ?? 0, icon: FileText },
-    { label: "Conversions", value: stats?.total_conversions ?? 0, icon: Zap },
-    { label: "Completed", value: stats?.completed_conversions ?? 0, icon: CheckCircle2 },
-    { label: "Failed", value: stats?.failed_conversions ?? 0, icon: XCircle },
+    { label: "Total Documents", value: stats?.totalDocuments ?? 0, icon: FileText },
+    { label: "Conversions", value: stats?.totalConversions ?? 0, icon: Zap },
+    { label: "Completed", value: stats?.completedConversions ?? 0, icon: CheckCircle2 },
+    { label: "Failed", value: stats?.failedConversions ?? 0, icon: XCircle },
   ];
 
   return (
@@ -97,7 +97,7 @@ export default function DashboardPage() {
                     <span className="font-medium text-sm text-brand-black">{conv.id.slice(0, 8)}...</span>
                   </div>
                   <span className="text-sm text-brand-dark-gray">
-                    {new Date(conv.created_at).toLocaleDateString()}
+                    {new Date(conv.createdAt).toLocaleDateString()}
                   </span>
                   <div className="text-right">
                     <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusClasses[conv.status] || "bg-brand-light-gray text-brand-dark-gray"}`}>

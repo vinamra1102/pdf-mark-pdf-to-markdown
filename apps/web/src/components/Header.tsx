@@ -1,11 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useAuth, SignInButton, UserButton } from "@clerk/nextjs";
 
 export function Header() {
-  const { isSignedIn } = useAuth();
-
   return (
     <header className="bg-brand-black border-b border-white/[0.08] h-[60px] sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex items-center justify-between h-full px-4">
@@ -24,23 +21,12 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          {isSignedIn ? (
-            <>
-              <Link href="/dashboard" className="text-white/65 hover:text-white text-sm font-medium transition-colors">
-                Dashboard
-              </Link>
-              <UserButton afterSignOutUrl="/" />
-            </>
-          ) : (
-            <>
-              <Link href="/sign-in" className="text-white/80 hover:text-white text-sm font-medium transition-colors">
-                Log in
-              </Link>
-              <Link href="/sign-up" className="btn-primary">
-                Get started
-              </Link>
-            </>
-          )}
+          <Link href="/sign-in" className="text-white/80 hover:text-white text-sm font-medium transition-colors">
+            Log in
+          </Link>
+          <Link href="/sign-up" className="btn-primary">
+            Get started
+          </Link>
         </div>
       </div>
     </header>

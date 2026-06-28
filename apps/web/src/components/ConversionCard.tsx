@@ -26,12 +26,12 @@ export function ConversionCard({ conversion }: ConversionCardProps) {
             <div>
               <p className="font-mono text-sm text-brand-black font-medium">{conversion.id.slice(0, 10)}...</p>
               <p className="text-xs text-brand-dark-gray">
-                {new Date(conversion.created_at).toLocaleDateString()} · {new Date(conversion.created_at).toLocaleTimeString()}
+                {new Date(conversion.createdAt).toLocaleDateString()} · {new Date(conversion.createdAt).toLocaleTimeString()}
               </p>
-              {conversion.pdf_type && (
+              {conversion.pdfType && (
                 <p className="text-xs text-brand-dark-gray mt-0.5">
-                  {conversion.pdf_type} · {conversion.page_count ?? "?"} pages
-                  {conversion.processing_time_ms && ` · ${(conversion.processing_time_ms / 1000).toFixed(1)}s`}
+                  {conversion.pdfType} · {conversion.pageCount ?? "?"} pages
+                  {conversion.processingTimeMs && ` · ${(conversion.processingTimeMs / 1000).toFixed(1)}s`}
                 </p>
               )}
             </div>

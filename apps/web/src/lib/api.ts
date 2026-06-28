@@ -2,14 +2,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 const API_PREFIX = "/api/v1";
 
 async function getAuthHeaders(): Promise<Record<string, string>> {
-  if (typeof window === "undefined") return {};
-  try {
-    const { getToken } = await import("@clerk/nextjs");
-    const token = await getToken();
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  } catch {
-    return {};
-  }
+  return {};
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {

@@ -22,8 +22,8 @@ export default function ConversionDetailPage() {
   const [copied, setCopied] = useState(false);
 
   const handleDownload = () => {
-    if (!conversion?.markdown_content) return;
-    const blob = new Blob([conversion.markdown_content], { type: "text/markdown" });
+    if (!conversion?.markdownContent) return;
+    const blob = new Blob([conversion.markdownContent], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -33,8 +33,8 @@ export default function ConversionDetailPage() {
   };
 
   const handleCopy = () => {
-    if (!conversion?.markdown_content) return;
-    navigator.clipboard.writeText(conversion.markdown_content);
+    if (!conversion?.markdownContent) return;
+    navigator.clipboard.writeText(conversion.markdownContent);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -72,9 +72,9 @@ export default function ConversionDetailPage() {
           <div>
             <h1 className="text-2xl font-bold text-brand-black mb-1">Conversion {id.slice(0, 12)}...</h1>
             <div className="flex items-center gap-3 text-sm text-brand-dark-gray">
-              <span>{new Date(conversion.created_at).toLocaleString()}</span>
-              {conversion.page_count && <span>· {conversion.page_count} pages</span>}
-              {conversion.pdf_type && <span>· {conversion.pdf_type} PDF</span>}
+              <span>{new Date(conversion.createdAt).toLocaleString()}</span>
+              {conversion.pageCount && <span>· {conversion.pageCount} pages</span>}
+              {conversion.pdfType && <span>· {conversion.pdfType} PDF</span>}
             </div>
           </div>
 
@@ -107,12 +107,12 @@ export default function ConversionDetailPage() {
       {conversion.status === ConversionStatus.FAILED && (
         <div className="rounded-xl border border-red-200 bg-red-50 p-6">
           <h3 className="font-semibold text-red-600 mb-2">Conversion Failed</h3>
-          <p className="text-sm text-brand-dark-gray">{conversion.error_message || "An unknown error occurred."}</p>
+          <p className="text-sm text-brand-dark-gray">{conversion.errorMessage || "An unknown error occurred."}</p>
         </div>
       )}
 
-      {conversion.status === ConversionStatus.COMPLETED && conversion.markdown_content && (
-        <MarkdownPreview content={conversion.markdown_content} />
+      {conversion.status === ConversionStatus.COMPLETED && conversion.markdownContent && (
+        <MarkdownPreview content={conversion.markdownContent} />
       )}
     </div>
   );
