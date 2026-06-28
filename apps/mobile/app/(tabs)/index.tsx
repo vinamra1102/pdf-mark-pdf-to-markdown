@@ -46,22 +46,22 @@ export default function UploadScreen() {
 
   if (!selectedFile || selectedFile.canceled) {
     return (
-      <View className="flex-1 bg-background px-6 pt-12">
+      <View className="flex-1 bg-brand-black px-6 pt-12">
         <View className="items-center mb-8">
-          <UploadCloud color="#3b82f6" size={40} />
-          <Text className="text-foreground text-2xl font-bold mt-4">Upload PDF</Text>
-          <Text className="text-muted-foreground text-center mt-2">
+          <UploadCloud color="#F25623" size={40} />
+          <Text className="text-white text-2xl font-bold mt-4">Upload PDF</Text>
+          <Text className="text-white/45 text-center mt-2">
             Select a PDF to convert to clean Markdown
           </Text>
         </View>
 
         <TouchableOpacity
           onPress={handlePick}
-          className="border-2 border-dashed border-border rounded-2xl p-10 items-center"
+          className="border-2 border-dashed border-white/10 rounded-2xl p-10 items-center bg-[#222222]"
         >
-          <UploadCloud color="#71717a" size={48} />
-          <Text className="text-muted-foreground mt-4 text-base">Tap to select PDF</Text>
-          <Text className="text-muted-foreground text-xs mt-1">Up to 100MB</Text>
+          <UploadCloud color="#F25623" size={48} />
+          <Text className="text-white/45 mt-4 text-base">Tap to select PDF</Text>
+          <Text className="text-white/45 text-xs mt-1">Up to 100MB</Text>
         </TouchableOpacity>
       </View>
     );
@@ -70,10 +70,10 @@ export default function UploadScreen() {
   const file = selectedFile.assets[0];
 
   return (
-    <View className="flex-1 bg-background px-6 pt-12">
+    <View className="flex-1 bg-brand-black px-6 pt-12">
       <View className="items-center mb-8">
-        <FileText color="#3b82f6" size={40} />
-        <Text className="text-foreground text-2xl font-bold mt-4">Ready to Convert</Text>
+        <FileText color="#F25623" size={40} />
+        <Text className="text-white text-2xl font-bold mt-4">Ready to Convert</Text>
       </View>
 
       <UploadCard

@@ -1,10 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, FileText, Zap, Table2, ScanEye, Globe, Shield, Columns2 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Header } from "@/components/Header";
 
 const features = [
@@ -17,148 +14,142 @@ const features = [
 ];
 
 const steps = [
-  { number: "1", title: "Upload PDF", description: "Drag and drop your PDF file. Supports up to 100MB — text, scanned, or mixed content." },
-  { number: "2", title: "AI Processing", description: "Our pipeline analyzes the PDF type, extracts text, detects tables, headings, and removes noise." },
-  { number: "3", title: "Get Markdown", description: "Download your perfectly formatted Markdown with tables, images, and headings preserved." },
+  { number: "STEP 01", title: "Upload PDF", description: "Drag and drop your PDF file. Supports up to 100MB — text, scanned, or mixed content." },
+  { number: "STEP 02", title: "AI Processing", description: "Our pipeline analyzes the PDF type, extracts text, detects tables, headings, and removes noise." },
+  { number: "STEP 03", title: "Get Markdown", description: "Download your perfectly formatted Markdown with tables, images, and headings preserved." },
 ];
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
 
-      <section className="relative overflow-hidden pt-32 pb-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-purple-600/10 animate-gradient bg-[length:200%_200%]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] opacity-30" />
-
-        <div className="relative max-w-5xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              PDF to Markdown
-              <br />
-              <span className="bg-gradient-to-r from-primary via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Made Effortless
-              </span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Convert any PDF into clean, structured Markdown in seconds. 
-              Advanced AI-powered processing handles text, tables, images, OCR — with beautiful precision.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link href="/upload">
-                <Button size="xl" className="gap-2">
-                  Get Started Free <ArrowRight className="h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/sign-in">
-                <Button variant="outline" size="xl">
-                  Sign In
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+      {/* HERO */}
+      <section className="bg-brand-black w-full py-24 text-center border-b border-white/[0.08]">
+        <div className="max-w-5xl mx-auto px-4 pt-[60px]">
+          <div className="badge mx-auto w-fit">PDF &rarr; Markdown converter</div>
+          <h1 className="text-white font-black text-[clamp(2.4rem,6vw,4rem)] leading-[1.05] tracking-[-0.03em] max-w-[700px] mx-auto mt-5 mb-5">
+            PDF to <span className="text-brand-orange italic">clean Markdown</span> in seconds
+          </h1>
+          <p className="text-white/55 text-base leading-relaxed max-w-[480px] mx-auto mb-9">
+            Convert any PDF into structured Markdown with advanced AI-powered processing. Tables, images, OCR — handled beautifully.
+          </p>
+          <div className="flex gap-3 justify-center">
+            <Link href="/upload" className="btn-primary inline-flex items-center gap-2">
+              Get Started Free <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/sign-in" className="btn-ghost-white inline-flex items-center gap-2">
+              Sign In
+            </Link>
+          </div>
+          <p className="text-white/30 text-[13px] mt-4">No credit card required</p>
         </div>
       </section>
 
-      <section id="features" className="py-24 px-4">
+      {/* STATS STRIP */}
+      <section className="bg-brand-orange w-full py-7">
+        <div className="max-w-4xl mx-auto grid grid-cols-3 divide-x divide-white/25 text-center px-4">
+          <div>
+            <div className="text-white font-bold text-2xl">10K+</div>
+            <div className="text-white/75 text-sm">Documents converted</div>
+          </div>
+          <div>
+            <div className="text-white font-bold text-2xl">99.2%</div>
+            <div className="text-white/75 text-sm">Accuracy rate</div>
+          </div>
+          <div>
+            <div className="text-white font-bold text-2xl">&lt;3s</div>
+            <div className="text-white/75 text-sm">Average processing</div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="features" className="bg-white py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need</h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="section-label mb-3">FEATURES</p>
+            <h2 className="text-brand-black text-3xl md:text-4xl font-bold mb-4">Everything You Need</h2>
+            <p className="text-brand-dark-gray text-base max-w-xl mx-auto">
               A complete PDF processing pipeline designed for accuracy and speed.
             </p>
-          </motion.div>
-
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Card className="h-full border-border/50 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <feature.icon className="h-10 w-10 text-primary mb-2" />
-                    <CardTitle className="text-lg">{feature.title}</CardTitle>
-                    <CardDescription>{feature.description}</CardDescription>
-                  </CardHeader>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" className="py-24 px-4 bg-card/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-muted-foreground text-lg">Three simple steps to convert your PDFs.</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="text-center"
-              >
-                <div className="w-14 h-14 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                  {step.number}
+            {features.map((feature) => (
+              <div key={feature.title} className="card">
+                <div className="bg-brand-orange/10 text-brand-orange rounded-lg p-2.5 w-fit mb-4">
+                  <feature.icon className="h-6 w-6" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                <p className="text-muted-foreground text-sm">{step.description}</p>
-              </motion.div>
+                <h3 className="text-brand-black font-semibold text-lg mb-2">{feature.title}</h3>
+                <p className="text-brand-dark-gray text-sm leading-relaxed">{feature.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 to-purple-600/10 p-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Convert?</h2>
-            <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
-              Start converting your PDFs to clean Markdown in seconds. Free to get started.
-            </p>
-            <Link href="/sign-up">
-              <Button size="xl" className="gap-2">
-                Start Converting Now <Zap className="h-5 w-5" />
-              </Button>
-            </Link>
-          </motion.div>
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" className="bg-brand-black py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="section-label mb-3">HOW IT WORKS</p>
+            <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Three Simple Steps</h2>
+            <p className="text-white/50 text-base">From PDF upload to clean Markdown in seconds.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {steps.map((step) => (
+              <div key={step.number} className="text-left">
+                <p className="text-brand-orange font-bold text-xs tracking-widest mb-5">{step.number}</p>
+                <h3 className="text-white font-semibold text-lg mb-2.5">{step.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <footer className="py-8 px-4 border-t border-border/50">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-primary" />
-            <span className="font-semibold">PDFMark</span>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} PDFMark. All rights reserved.
+      {/* CTA BAND */}
+      <section className="bg-brand-orange py-20 px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-white font-black text-[clamp(1.8rem,4vw,2.8rem)] tracking-tight">
+            Ready to Convert Your PDFs?
+          </h2>
+          <p className="text-white/70 text-base max-w-md mx-auto my-4">
+            Start converting your PDFs to clean Markdown in seconds. Free to get started.
           </p>
+          <div className="flex gap-3 justify-center mt-8">
+            <Link href="/sign-up" className="bg-white text-brand-orange font-bold px-7 py-3 rounded-md hover:bg-white/90 transition-colors inline-flex items-center gap-2">
+              Start converting <Zap className="h-4 w-4" />
+            </Link>
+            <Link href="/#features" className="btn-ghost-white inline-flex items-center gap-2">
+              Read the docs
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-brand-black py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+            <div>
+              <div className="flex items-center gap-2">
+                <div className="bg-brand-orange w-7 h-7 rounded-lg flex items-center justify-center text-white font-bold text-xs">P</div>
+                <span className="text-white font-semibold">PDFMark</span>
+              </div>
+              <p className="text-white/40 text-sm mt-2.5">Convert PDFs to Markdown with precision.</p>
+            </div>
+            <div className="flex items-center gap-6">
+              <Link href="/#features" className="text-white/45 text-[13px] hover:text-white/90 transition-colors">Features</Link>
+              <Link href="/#how-it-works" className="text-white/45 text-[13px] hover:text-white/90 transition-colors">How It Works</Link>
+              <Link href="/sign-up" className="text-white/45 text-[13px] hover:text-white/90 transition-colors">Get Started</Link>
+            </div>
+          </div>
+          <div className="border-t border-white/[0.08] mt-12 pt-5">
+            <p className="text-white/30 text-[13px]">
+              &copy; {new Date().getFullYear()} PDFMark. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
     </div>

@@ -2,10 +2,10 @@ import { View, Text } from "react-native";
 import { ConversionStatus } from "@pdfmark/shared";
 
 const statusColors: Record<string, { bg: string; text: string }> = {
-  [ConversionStatus.PENDING]: { bg: "#92400e20", text: "#fbbf24" },
-  [ConversionStatus.PROCESSING]: { bg: "#1e3a5f20", text: "#3b82f6" },
-  [ConversionStatus.COMPLETED]: { bg: "#064e3b20", text: "#34d399" },
-  [ConversionStatus.FAILED]: { bg: "#7f1d1d20", text: "#f87171" },
+  [ConversionStatus.PENDING]: { bg: "#DEDEDE", text: "#4D4D4D" },
+  [ConversionStatus.PROCESSING]: { bg: "rgba(242,86,35,0.1)", text: "#F25623" },
+  [ConversionStatus.COMPLETED]: { bg: "#f0fdf4", text: "#15803d" },
+  [ConversionStatus.FAILED]: { bg: "#fef2f2", text: "#dc2626" },
 };
 
 interface StatusBadgeProps {

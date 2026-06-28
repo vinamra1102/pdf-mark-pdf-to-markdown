@@ -1,37 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 5.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 5.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --radius: 0.75rem;
-  }
+:root {
+  --black: #171717;
+  --orange: #F25623;
+  --dark-gray: #4D4D4D;
+  --light-gray: #DEDEDE;
+  --white: #FFFFFF;
+  --orange-hover: #D94115;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-brand-black font-sans antialiased;
+  }
+  h1,h2,h3,h4 {
+    @apply font-bold tracking-tight text-brand-black;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-orange text-white font-semibold text-sm px-6 py-2.5
+           rounded-md hover:bg-[#D94115] transition-colors duration-150
+           border-none cursor-pointer;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-brand-black font-medium text-sm px-6 py-2.5
+           rounded-md border border-brand-light-gray hover:border-brand-dark-gray
+           transition-colors duration-150 cursor-pointer;
+  }
+  .btn-ghost-white {
+    @apply bg-transparent text-white font-medium text-sm px-6 py-2.5
+           rounded-md border border-white/40 hover:border-white
+           transition-colors duration-150 cursor-pointer;
+  }
+  .card {
+    @apply bg-white border border-brand-light-gray rounded-xl p-7;
+  }
+  .card-dark {
+    @apply bg-brand-black rounded-xl p-7;
+  }
+  .section-label {
+    @apply text-brand-orange text-xs font-semibold tracking-widest uppercase;
+  }
+  .badge {
+    @apply bg-brand-orange/15 text-brand-orange text-xs font-semibold
+           tracking-wide uppercase px-3 py-1 rounded-full
+           border border-brand-orange/30;
+  }
+  .code-block {
+    @apply bg-[#0D0D0D] rounded-md p-4 font-mono text-[13px]
+           text-white/80 leading-relaxed;
+  }
+  .tag {
+    @apply bg-brand-light-gray text-brand-dark-gray text-xs
+           font-medium px-2.5 py-1 rounded;
   }
 }

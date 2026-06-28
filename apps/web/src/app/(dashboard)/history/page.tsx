@@ -1,13 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { History as HistoryIcon } from "lucide-react";
 import { useConversions } from "@/hooks/useConversions";
 import { ConversionCard } from "@/components/ConversionCard";
-import { Button } from "@/components/ui/Button";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { Card, CardContent } from "@/components/ui/Card";
 import { ConversionStatus } from "@/types";
 
 const tabs = [
@@ -24,43 +20,44 @@ export default function HistoryPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+      <div>
         <div className="flex items-center gap-3 mb-2">
-          <HistoryIcon className="h-7 w-7 text-primary" />
-          <h1 className="text-3xl font-bold">History</h1>
+          <HistoryIcon className="h-7 w-7 text-brand-orange" />
+          <h1 className="text-3xl font-bold text-brand-black">History</h1>
         </div>
-        <p className="text-muted-foreground">Browse all your PDF conversions</p>
-      </motion.div>
+        <p className="text-brand-dark-gray">Browse all your PDF conversions</p>
+      </div>
 
       <div className="flex gap-2">
         {tabs.map((tab) => (
-          <Button
+          <button
             key={tab.label}
-            variant={status === tab.value ? "default" : "outline"}
-            size="sm"
+            className={
+              status === tab.value
+                ? "btn-primary !px-4 !py-2 text-sm"
+                : "btn-ghost !px-4 !py-2 text-sm"
+            }
             onClick={() => {
               setStatus(tab.value);
               setPage(1);
             }}
           >
             {tab.label}
-          </Button>
+          </button>
         ))}
       </div>
 
       {isLoading ? (
         <div className="space-y-3">
           {[...Array(5)].map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full" />
+            <div key={i} className="h-16 w-full bg-brand-light-gray/50 rounded-xl animate-pulse" />
           ))}
         </div>
       ) : !data?.items?.length ? (
-        <Card>
-          <CardContent className="p-8 text-center">
-            <HistoryIcon className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-            <p className="text-muted-foreground">No conversions found</p>
-          </CardContent>
-        </Card>
+        <div className="bg-white border border-brand-light-gray rounded-xl p-8 text-center">
+          <HistoryIcon className="h-10 w-10 text-brand-dark-gray mx-auto mb-3" />
+          <p className="text-brand-dark-gray">No conversions found</p>
+        </div>
       ) : (
         <>
           <div className="space-y-3">
@@ -71,25 +68,23 @@ export default function HistoryPage() {
 
           {data.pages > 1 && (
             <div className="flex items-center justify-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
+              <button
+                className="btn-ghost !px-4 !py-2 text-sm disabled:opacity-50"
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
               >
                 Previous
-              </Button>
-              <span className="text-sm text-muted-foreground">
+              </button>
+              <span className="text-sm text-brand-dark-gray">
                 Page {page} of {data.pages}
               </span>
-              <Button
-                variant="outline"
-                size="sm"
+              <button
+                className="btn-ghost !px-4 !py-2 text-sm disabled:opacity-50"
                 disabled={page >= data.pages}
                 onClick={() => setPage((p) => p + 1)}
               >
                 Next
-              </Button>
+              </button>
             </div>
           )}
         </>
@@ -97,7 +92,7 @@ export default function HistoryPage() {
 
       {isFetching && !isLoading && (
         <div className="flex justify-center py-4">
-          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary" />
+          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-brand-orange" />
         </div>
       )}
     </div>

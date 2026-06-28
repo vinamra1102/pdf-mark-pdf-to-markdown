@@ -23,34 +23,36 @@ export default function HistoryScreen() {
   };
 
   return (
-    <View className="flex-1 bg-background px-6 pt-12">
-      <View className="flex-row items-center gap-3 mb-6">
-        <Clock color="#3b82f6" size={24} />
-        <Text className="text-foreground text-2xl font-bold">History</Text>
-      </View>
+    <View className="flex-1 bg-[#F7F7F7] px-6 pt-12">
+      <View className="bg-white border-b border-[#DEDEDE] -mx-6 px-6 pb-4 mb-4">
+        <View className="flex-row items-center gap-3 mb-4">
+          <Clock color="#F25623" size={24} />
+          <Text className="text-[#171717] text-2xl font-bold">History</Text>
+        </View>
 
-      <View className="flex-row gap-2 mb-6">
-        {tabs.map((tab) => (
-          <TouchableOpacity
-            key={tab.label}
-            onPress={() => setStatus(tab.value)}
-            className={`px-4 py-2 rounded-full ${status === tab.value ? "bg-primary" : "bg-secondary"}`}
-          >
-            <Text className={status === tab.value ? "text-primary-foreground" : "text-muted-foreground"}>
-              {tab.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        <View className="flex-row gap-2">
+          {tabs.map((tab) => (
+            <TouchableOpacity
+              key={tab.label}
+              onPress={() => setStatus(tab.value)}
+              className={`px-4 py-2 rounded-full ${status === tab.value ? "bg-brand-orange" : "bg-[#DEDEDE]"}`}
+            >
+              <Text className={status === tab.value ? "text-white font-semibold" : "text-[#4D4D4D]"}>
+                {tab.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
 
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#3b82f6" size="large" />
+          <ActivityIndicator color="#F25623" size="large" />
         </View>
       ) : !data?.items?.length ? (
         <View className="flex-1 items-center justify-center">
-          <Clock color="#71717a" size={40} />
-          <Text className="text-muted-foreground mt-4">No conversions yet</Text>
+          <Clock color="#4D4D4D" size={40} />
+          <Text className="text-[#4D4D4D] mt-4">No conversions yet</Text>
         </View>
       ) : (
         <FlatList
@@ -60,7 +62,7 @@ export default function HistoryScreen() {
             <ConversionListItem conversion={item} onPress={() => handlePress(item)} />
           )}
           refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor="#3b82f6" />
+            <RefreshControl refreshing={isRefetching} onRefresh={refetch} tintColor="#F25623" />
           }
           contentContainerStyle={{ gap: 8 }}
           showsVerticalScrollIndicator={false}

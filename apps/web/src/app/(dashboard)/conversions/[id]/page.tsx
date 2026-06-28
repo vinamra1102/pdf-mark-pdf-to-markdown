@@ -1,22 +1,18 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { Download, ArrowLeft, Copy, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useConversion } from "@/hooks/useConversions";
 import { MarkdownPreview } from "@/components/MarkdownPreview";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
-import { Skeleton } from "@/components/ui/Skeleton";
 import { ConversionStatus } from "@/types";
 
-const statusBadgeVariant: Record<string, "default" | "success" | "warning" | "destructive"> = {
-  [ConversionStatus.PENDING]: "warning",
-  [ConversionStatus.PROCESSING]: "default",
-  [ConversionStatus.COMPLETED]: "success",
-  [ConversionStatus.FAILED]: "destructive",
+const statusClasses: Record<string, string> = {
+  [ConversionStatus.PENDING]: "bg-brand-light-gray text-brand-dark-gray",
+  [ConversionStatus.PROCESSING]: "bg-brand-orange/10 text-brand-orange border border-brand-orange/25",
+  [ConversionStatus.COMPLETED]: "bg-green-50 text-green-700 border border-green-200",
+  [ConversionStatus.FAILED]: "bg-red-50 text-red-600 border border-red-200",
 };
 
 export default function ConversionDetailPage() {
@@ -46,9 +42,9 @@ export default function ConversionDetailPage() {
   if (isLoading) {
     return (
       <div className="max-w-5xl mx-auto space-y-6">
-        <Skeleton className="h-8 w-48" />
-        <Skeleton className="h-4 w-72" />
-        <Skeleton className="h-[500px] w-full rounded-xl" />
+        <div className="h-8 w-48 bg-brand-light-gray/50 rounded animate-pulse" />
+        <div className="h-4 w-72 bg-brand-light-gray/50 rounded animate-pulse" />
+        <div className="h-[500px] w-full bg-brand-light-gray/50 rounded-xl animate-pulse" />
       </div>
     );
   }
@@ -56,12 +52,10 @@ export default function ConversionDetailPage() {
   if (error || !conversion) {
     return (
       <div className="max-w-5xl mx-auto text-center py-12">
-        <h2 className="text-xl font-semibold mb-2">Conversion not found</h2>
-        <p className="text-muted-foreground mb-4">The conversion you&apos;re looking for doesn&apos;t exist.</p>
-        <Link href="/history">
-          <Button variant="outline">
-            <ArrowLeft className="h-4 w-4 mr-2" /> Back to History
-          </Button>
+        <h2 className="text-xl font-semibold text-brand-black mb-2">Conversion not found</h2>
+        <p className="text-brand-dark-gray mb-4">The conversion you&apos;re looking for doesn&apos;t exist.</p>
+        <Link href="/history" className="btn-ghost inline-flex items-center gap-2">
+          <ArrowLeft className="h-4 w-4" /> Back to History
         </Link>
       </div>
     );
@@ -69,15 +63,15 @@ export default function ConversionDetailPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-        <Link href="/history" className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1 mb-4">
+      <div>
+        <Link href="/history" className="text-sm text-brand-dark-gray hover:text-brand-black inline-flex items-center gap-1 mb-4 transition-colors">
           <ArrowLeft className="h-3 w-3" /> Back to History
         </Link>
 
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-2xl font-bold mb-1">Conversion {id.slice(0, 12)}...</h1>
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <h1 className="text-2xl font-bold text-brand-black mb-1">Conversion {id.slice(0, 12)}...</h1>
+            <div className="flex items-center gap-3 text-sm text-brand-dark-gray">
               <span>{new Date(conversion.created_at).toLocaleString()}</span>
               {conversion.page_count && <span>· {conversion.page_count} pages</span>}
               {conversion.pdf_type && <span>· {conversion.pdf_type} PDF</span>}
@@ -85,50 +79,40 @@ export default function ConversionDetailPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Badge variant={statusBadgeVariant[conversion.status] || "default"} className="text-sm px-3 py-1">
+            <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ${statusClasses[conversion.status] || "bg-brand-light-gray text-brand-dark-gray"}`}>
               {conversion.status}
-            </Badge>
+            </span>
             {conversion.status === ConversionStatus.COMPLETED && (
               <>
-                <Button variant="outline" size="sm" onClick={handleCopy}>
+                <button onClick={handleCopy} className="btn-ghost inline-flex items-center gap-1.5 !px-4 !py-2">
                   {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   {copied ? "Copied" : "Copy"}
-                </Button>
-                <Button size="sm" onClick={handleDownload}>
-                  <Download className="h-4 w-4 mr-1" /> Download
-                </Button>
+                </button>
+                <button onClick={handleDownload} className="btn-primary inline-flex items-center gap-1.5">
+                  <Download className="h-4 w-4" /> Download
+                </button>
               </>
             )}
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {conversion.status === ConversionStatus.PROCESSING && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex items-center justify-center py-12 gap-3"
-        >
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
-          <span className="text-muted-foreground">Processing your PDF... This may take a moment.</span>
-        </motion.div>
+        <div className="flex items-center justify-center py-12 gap-3">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-brand-orange" />
+          <span className="text-brand-dark-gray">Processing your PDF... This may take a moment.</span>
+        </div>
       )}
 
       {conversion.status === ConversionStatus.FAILED && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="rounded-xl border border-red-500/20 bg-red-500/5 p-6"
-        >
-          <h3 className="font-semibold text-red-400 mb-2">Conversion Failed</h3>
-          <p className="text-sm text-muted-foreground">{conversion.error_message || "An unknown error occurred."}</p>
-        </motion.div>
+        <div className="rounded-xl border border-red-200 bg-red-50 p-6">
+          <h3 className="font-semibold text-red-600 mb-2">Conversion Failed</h3>
+          <p className="text-sm text-brand-dark-gray">{conversion.error_message || "An unknown error occurred."}</p>
+        </div>
       )}
 
       {conversion.status === ConversionStatus.COMPLETED && conversion.markdown_content && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-          <MarkdownPreview content={conversion.markdown_content} />
-        </motion.div>
+        <MarkdownPreview content={conversion.markdown_content} />
       )}
     </div>
   );

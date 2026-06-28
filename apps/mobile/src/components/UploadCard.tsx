@@ -25,12 +25,12 @@ export function UploadCard({
   const sizeMB = (sizeBytes / (1024 * 1024)).toFixed(1);
 
   return (
-    <View className="bg-card rounded-xl border border-border p-4">
+    <View className="bg-[#222222] rounded-2xl border border-white/10 p-4">
       <View className="flex-row items-center gap-3 mb-4">
-        <FileText color="#3b82f6" size={32} />
+        <FileText color="#F25623" size={32} />
         <View className="flex-1">
-          <Text className="text-foreground font-medium" numberOfLines={1}>{filename}</Text>
-          <Text className="text-muted-foreground text-sm">{sizeMB} MB</Text>
+          <Text className="text-white font-semibold" numberOfLines={1}>{filename}</Text>
+          <Text className="text-white/45 text-sm">{sizeMB} MB</Text>
         </View>
       </View>
 
@@ -39,35 +39,35 @@ export function UploadCard({
           <TouchableOpacity
             onPress={onUpload}
             disabled={isConverting}
-            className="flex-1 bg-primary py-3 rounded-lg items-center"
+            className="flex-1 bg-brand-orange py-3 rounded-xl items-center"
           >
             {isConverting ? (
-              <ActivityIndicator color="#fafafa" size="small" />
+              <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <Text className="text-primary-foreground font-semibold">Upload & Convert</Text>
+              <Text className="text-white font-bold">Upload & Convert</Text>
             )}
           </TouchableOpacity>
-          <TouchableOpacity onPress={onCancel} className="bg-secondary py-3 px-6 rounded-lg">
-            <Text className="text-muted-foreground">Cancel</Text>
+          <TouchableOpacity onPress={onCancel} className="bg-[#4D4D4D] py-3 px-6 rounded-xl">
+            <Text className="text-white/45">Cancel</Text>
           </TouchableOpacity>
         </View>
       )}
 
       {status === "uploading" && (
         <View>
-          <View className="h-2 bg-secondary rounded-full overflow-hidden mb-2">
+          <View className="h-2 bg-white/10 rounded-full overflow-hidden mb-2">
             <View
-              className="h-full bg-primary rounded-full"
+              className="h-full bg-brand-orange rounded-full"
               style={{ width: `${progress}%` }}
             />
           </View>
-          <Text className="text-muted-foreground text-sm text-center">{progress}%</Text>
+          <Text className="text-white/45 text-sm text-center">{progress}%</Text>
         </View>
       )}
 
       {(status === "done" || status === "error") && (
-        <TouchableOpacity onPress={onCancel} className="bg-secondary py-3 rounded-lg items-center">
-          <Text className="text-muted-foreground">Upload another</Text>
+        <TouchableOpacity onPress={onCancel} className="bg-[#4D4D4D] py-3 rounded-xl items-center">
+          <Text className="text-white/45">Upload another</Text>
         </TouchableOpacity>
       )}
 
